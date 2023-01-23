@@ -101,19 +101,22 @@ public class EnhetstestBankController {
         // assert
         assertNull(resultat);
     }
+
 }
 
-/* skrevet av andrea
+    /* skrevet av andrea */
+    /*
     @Test
     public void hentTransaksjoner_LoggetInn(){
         // arrange
         List<Transaksjon> transaksjoner = new ArrayList<>();
-        List<Konto> konti = new ArrayList<>();
-        Konto konto1 = new Konto("105010123456", "01010110523",
-                720, "Lønnskonto", "NOK", null);
-        konti.add(konto1);
 
-        when(sjekk.loggetInn()).thenReturn("105010123456");
+        Transaksjon transaksjon1 = new Transaksjon();
+
+
+        when(sjekk.loggetInn()).thenReturn("01010110523");
+
+        when(repository.hentKonti(anyString())).thenReturn(Transaksjon);
     }
 
     @Test
@@ -122,11 +125,12 @@ public class EnhetstestBankController {
         when(sjekk.loggetInn()).thenReturn(null);
 
         // act
-        //Konto resultat = bankController.hentTransaksjoner();
+        Konto resultat = bankController.hentTransaksjoner();
 
         // assert
-        //assertNull(resultat);
+        assertNull(resultat);
     }
-}
 
-*/
+}*/
+
+
