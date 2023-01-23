@@ -3,9 +3,10 @@
 package oslomet.testing;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import oslomet.testing.API.AdminKundeController;
 import oslomet.testing.DAL.AdminRepository;
 import oslomet.testing.Models.Kunde;
@@ -17,7 +18,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class EnhetstestAdminKundeController {
 
     @InjectMocks
@@ -36,27 +39,31 @@ public class EnhetstestAdminKundeController {
     @Test
     public void test_HentAlleOK() {
 
+        List<Kunde> kundeliste = new ArrayList<>();
+
         //arrage
         Kunde kunde1 = new Kunde("151299", "Kalle", "Knudsen", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
         Kunde kunde2 = new Kunde("120997", "Rita", "Ottervik", "Rosenborggata", "7022", "Trondheim", "45623390", "Hemmelig");
-        List<Kunde> kundeliste = new ArrayList<>();
+
         kundeliste.add(kunde1);
         kundeliste.add(kunde2);
 
-        Mockito.when(repository.hentAlleKunder()).thenReturn(kundeliste);
+        when(sjekk.loggetInn()).thenReturn("151299");
+
+        when(repository.hentAlleKunder()).thenReturn(kundeliste);
 
         //act
         List<Kunde> resultat = adminKundeController.hentAlle();
 
-        // assert, vi forventer at kundelisten er det samme som resultatet
-        assertNull(resultat); //Hvorfor null og ikke kundeliste?
+        // assert
+        assertEquals(kundeliste, resultat);
     }
 
     @Test
     public void test_hentAlleFeil() {
 
         // arrage
-        Mockito.when(repository.hentAlleKunder()).thenReturn(null);
+        when(sjekk.loggetInn()).thenReturn(null);
 
         // act
         List<Kunde> resultat = adminKundeController.hentAlle();
@@ -69,24 +76,25 @@ public class EnhetstestAdminKundeController {
     public void test_lagreKundeOk(){
 
         // arrage
-        Kunde kunde1 = new Kunde("151299", "Ben", "Baller", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
+        Kunde kunde1 = new Kunde("151299", "Kalle", "Knudsen", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
 
-        Mockito.when(repository.registrerKunde((any(Kunde.class)))).thenReturn(null);
+        when(sjekk.loggetInn()).thenReturn("151299");
+        when(repository.registrerKunde((any(Kunde.class)))).thenReturn(null);
 
         //act
         String resultat = adminKundeController.lagreKunde(kunde1);
 
         //assert
-        assertEquals("Ikke logget inn", resultat); //hvorfor ikke null?
+        assertNull(resultat); //hvorfor ikke null?
     }
 
     @Test
     public void test_lagreKundeFeil(){
 
         // arrage
-        Kunde kunde1 = new Kunde("151299", "Ben", "Baller", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
+        Kunde kunde1 = new Kunde("151299", "Kalle", "Knudsen", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
 
-        Mockito.when(repository.registrerKunde((any(Kunde.class)))).thenReturn("Ikke logget inn");
+        when(repository.registrerKunde((any(Kunde.class)))).thenReturn("Ikke logget inn");
 
         //act
         String resultat = adminKundeController.lagreKunde(kunde1);
