@@ -1,12 +1,22 @@
 package oslomet.testing;
 
+
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.MockitoJUnitRunner;
+
+@RunWith(MockitoJUnitRunner.class)
 public class EnhetstestSikkerhetController {
 
+    @InjectMocks
 
-    //Sigurd og Krissa sin del
 
+<<<<<<< Updated upstream
     //hallaballa
 
+=======
+    //Sigurd og Krissa sin del
+>>>>>>> Stashed changes
 
 
     //HALLA DAMER
@@ -21,9 +31,8 @@ public class EnhetstestSikkerhetController {
     //2. halla damer - Sigurd
 
 
-
     // ^__^
 
-//Andrea
+    //Andrea
 }
 
