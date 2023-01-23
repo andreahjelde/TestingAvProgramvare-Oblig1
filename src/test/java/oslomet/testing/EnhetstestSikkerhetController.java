@@ -12,9 +12,6 @@ public class EnhetstestSikkerhetController {
 
     //2. halla damer - Sigurd
 
-
-    //Test11234567890
-//Test
-//testtesttest
+//Andrea
 }
 
