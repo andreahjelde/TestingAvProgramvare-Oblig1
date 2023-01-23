@@ -1,5 +1,6 @@
 package oslomet.testing;
-//Andrea
+//Andrea - ny test
+//gvuehbijnd
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
