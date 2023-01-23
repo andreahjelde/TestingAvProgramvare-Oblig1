@@ -1,6 +1,12 @@
 package oslomet.testing;
 
 public class EnhetstestSikkerhetController {
+
+
+    //Sigurd og Krissa sin del
+
+
+
     //HALLA DAMER
 
 
