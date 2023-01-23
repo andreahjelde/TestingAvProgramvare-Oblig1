@@ -103,7 +103,7 @@ public class EnhetstestBankController {
     }
 }
 
-/*
+/* skrevet av andrea
     @Test
     public void hentTransaksjoner_LoggetInn(){
         // arrange
