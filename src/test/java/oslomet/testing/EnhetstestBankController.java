@@ -106,16 +106,18 @@ public class EnhetstestBankController {
 }
 
     /* skrevet av andrea */
-    /*
+/*
+    //hentTransaksjoner
+
     @Test
     public void hentTransaksjoner_LoggetInn(){
         // arrange
         List<Transaksjon> transaksjoner = new ArrayList<>();
 
-        Transaksjon transaksjon1 = new Transaksjon();
+        Transaksjon transaksjon1 = new Transaksjon(1, "20102012345", 100.5, "2015-03-15", "Fjordkraft", "105010123456", 1);
+        Transaksjon.add(transaksjon1);
 
-
-        when(sjekk.loggetInn()).thenReturn("01010110523");
+        when(sjekk.loggetInn()).thenReturn("20102012345");
 
         when(repository.hentKonti(anyString())).thenReturn(Transaksjon);
     }
@@ -132,6 +134,7 @@ public class EnhetstestBankController {
         assertNull(resultat);
     }
 
-}*/
+}
 
 
+*/
