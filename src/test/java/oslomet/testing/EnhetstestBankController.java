@@ -1,6 +1,6 @@
 package oslomet.testing;
 //Andrea - ny test
-//gvuehbijnd
+
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -104,23 +104,33 @@ public class EnhetstestBankController {
         assertNull(resultat);
     }
 
-}
+
 
     /* skrevet av andrea */
-/*
-    //hentTransaksjoner
+
+    //Hent transaksjoner -->
 
     @Test
     public void hentTransaksjoner_LoggetInn(){
         // arrange
         List<Transaksjon> transaksjoner = new ArrayList<>();
 
-        Transaksjon transaksjon1 = new Transaksjon(1, "20102012345", 100.5, "2015-03-15", "Fjordkraft", "105010123456", 1);
-        Transaksjon.add(transaksjon1);
+        Transaksjon transaksjon1 = new Transaksjon(1, "20102012345", 100.5, "2015-03-15", "Fjordkraft", "105010123456", "1");
+        Transaksjon transaksjon2 = new Transaksjon(2, "20102012345", 400.4, "2015-03-20", "Skagen", "105010123456", "1");
+        transaksjoner.add(transaksjon1);
+        transaksjoner.add(transaksjon2);
 
-        when(sjekk.loggetInn()).thenReturn("20102012345");
+        Konto konti = new Konto("105010123456", "01010110523", 720, "Lønnskonto", "NOK", transaksjoner);
 
-        when(repository.hentKonti(anyString())).thenReturn(Transaksjon);
+        when(sjekk.loggetInn()).thenReturn("105010123456");
+
+        when(repository.hentTransaksjoner(anyString(), anyString(), anyString())).thenReturn(konti);
+
+        // act
+        Konto resultat = bankController.hentTransaksjoner("", "", "");
+
+        // assert
+        assertEquals(konti, resultat);
     }
 
     @Test
@@ -129,7 +139,7 @@ public class EnhetstestBankController {
         when(sjekk.loggetInn()).thenReturn(null);
 
         // act
-        Konto resultat = bankController.hentTransaksjoner();
+        Konto resultat = bankController.hentTransaksjoner("", "", "");
 
         // assert
         assertNull(resultat);
@@ -138,4 +148,3 @@ public class EnhetstestBankController {
 }
 
 
-*/
