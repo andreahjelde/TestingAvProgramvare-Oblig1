@@ -85,7 +85,7 @@ public class EnhetstestAdminKundeController {
         String resultat = adminKundeController.lagreKunde(kunde1);
 
         //assert
-        assertNull(resultat); //hvorfor ikke null?
+        assertNull(resultat);
     }
 
     @Test
