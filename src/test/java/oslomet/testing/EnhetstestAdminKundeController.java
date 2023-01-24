@@ -108,6 +108,38 @@ public class EnhetstestAdminKundeController {
 
 
     //Endre, enten null eller "Ikke logget inn"
+    @Test
+    public void test_endreKundeOk(){
+
+        // arrage
+        Kunde kunde1 = new Kunde("151299", "Kalle", "Knudsen", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
+
+        when(sjekk.loggetInn()).thenReturn("151299");
+        when(repository.endreKundeInfo((any(Kunde.class)))).thenReturn(null);
+
+        //act
+        String resultat = adminKundeController.endre(kunde1);
+
+        //assert
+        assertNull(resultat);
+    }
+
+    @Test
+    public void test_endreKundeFeil(){
+
+        // arrage
+        Kunde kunde1 = new Kunde("151299", "Kalle", "Knudsen", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
+
+        when(repository.endreKundeInfo((any(Kunde.class)))).thenReturn("Ikke logget inn");
+
+        //act
+        String resultat = adminKundeController.endre(kunde1);
+
+        //assert
+        assertEquals("Ikke logget inn", resultat);
+    }
+
+
 
     //Slett, enten null eller "Ikke logget inn"
 
