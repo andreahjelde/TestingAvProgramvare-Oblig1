@@ -19,6 +19,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -73,10 +74,8 @@ public class EnhetstestBankController {
     public void hentKonti_LoggetInn() {
         // arrange
         List<Konto> konti = new ArrayList<>();
-        Konto konto1 = new Konto("105010123456", "01010110523",
-                720, "Lønnskonto", "NOK", null);
-        Konto konto2 = new Konto("105010123456", "12345678901",
-                1000, "Lønnskonto", "NOK", null);
+        Konto konto1 = new Konto("105010123456", "01010110523", 720, "Lønnskonto", "NOK", null);
+        Konto konto2 = new Konto("105020123456", "01010110523", 100_500, "Sparekonto", "NOK", null);
         konti.add(konto1);
         konti.add(konto2);
 
@@ -116,16 +115,16 @@ public class EnhetstestBankController {
         List<Transaksjon> transaksjoner = new ArrayList<>();
 
         Transaksjon transaksjon1 = new Transaksjon(1, "20102012345", 100.5,
-                "2015-03-15", "Fjordkraft", "105010123456", "1");
+                "2015-03-15", "Fjordkraft", "1", "105010123456");
         Transaksjon transaksjon2 = new Transaksjon(2, "20102012345", 400.4,
-                "2015-03-20", "Skagen", "105010123456", "1");
+                "2015-03-20", "Skagen", "1", "105010123456");
         transaksjoner.add(transaksjon1);
         transaksjoner.add(transaksjon2);
 
-        Konto konti = new Konto("105010123456", "01010110523", 720, "Lønnskonto",
+        Konto konti = new Konto("01010110523", "105010123456", 720, "Lønnskonto",
                 "NOK", transaksjoner);
 
-        when(sjekk.loggetInn()).thenReturn("105010123456");
+        when(sjekk.loggetInn()).thenReturn("01010110523");
 
         when(repository.hentTransaksjoner(anyString(), anyString(), anyString())).thenReturn(konti);
 
@@ -148,6 +147,7 @@ public class EnhetstestBankController {
         assertNull(resultat);
     }
 
+    //Hent Saldi -->
     @Test
     public void hentSaldi_LoggetInn(){
         // arrange
@@ -184,14 +184,15 @@ public class EnhetstestBankController {
         assertNull(resultat);
     }
 
+    //Hent betalinger -->
     @Test
     public void hentBetalinger_LoggetInn(){
         List<Transaksjon> transaksjoner = new ArrayList<>();
 
         Transaksjon transaksjon1 = new Transaksjon(1, "20102012345", 100.5,
-                "2015-03-15", "Fjordkraft", "105010123456", "1");
+                "2015-03-15", "Fjordkraft", "1", "105010123456");
         Transaksjon transaksjon2 = new Transaksjon(2, "20102012345", 400.4,
-                "2015-03-20", "Skagen", "105010123456", "1");
+                "2015-03-20", "Skagen", "1", "105010123456");
         transaksjoner.add(transaksjon1);
         transaksjoner.add(transaksjon2);
 
@@ -218,5 +219,42 @@ public class EnhetstestBankController {
         assertNull(resultat);
     }
 
-   
+    //Utfør betalinger -->
+
+    @Test
+    public void utforBetaling_LoggetInn(){
+        // arrange
+        List<Transaksjon> transaksjoner = new ArrayList<>();
+
+        Transaksjon transaksjon1 = new Transaksjon(1, "20102012345", 100.5,
+                "2015-03-15", "Fjordkraft", "105010123456", "1");
+        Transaksjon transaksjon2 = new Transaksjon(2, "20102012345", 400.4,
+                "2015-03-20", "Skagen", "1", "105010123456");
+
+        transaksjoner.add(transaksjon1);
+        transaksjoner.add(transaksjon2);
+
+        when(sjekk.loggetInn()).thenReturn("105010123456");
+
+        when(repository.utforBetaling(anyInt())).thenReturn("OK");
+        when(repository.hentBetalinger(anyString())).thenReturn(transaksjoner);
+
+        // act
+        List<Transaksjon> resultat = bankController.utforBetaling(transaksjoner.get(0).getTxID());
+
+        // assert
+        assertEquals(transaksjoner, resultat);
+    }
+
+    @Test
+    public void utforBetaling_IkkeLoggetInn(){
+        // arrange
+        when(sjekk.loggetInn()).thenReturn(null);
+
+        // act
+        List<Transaksjon> resultat = bankController.utforBetaling(12);
+
+        // assert
+        assertNull(resultat);
+    }
 }
