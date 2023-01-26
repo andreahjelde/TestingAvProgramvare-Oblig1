@@ -219,6 +219,7 @@ public class EnhetstestBankController {
         assertNull(resultat);
     }
 
+
     //Utfør betalinger -->
 
     @Test
@@ -257,4 +258,5 @@ public class EnhetstestBankController {
         // assert
         assertNull(resultat);
     }
+
 }
