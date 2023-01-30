@@ -18,6 +18,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -41,7 +42,7 @@ public class EnhetstestAdminKundeController {
 
         List<Kunde> kundeliste = new ArrayList<>();
 
-        //arrage
+        //arrange
         Kunde kunde1 = new Kunde("151299", "Kalle", "Knudsen", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
         Kunde kunde2 = new Kunde("120997", "Rita", "Ottervik", "Rosenborggata", "7022", "Trondheim", "45623390", "Hemmelig");
 
@@ -62,7 +63,7 @@ public class EnhetstestAdminKundeController {
     @Test
     public void test_hentAlleFeil() {
 
-        // arrage
+        // arrange
         when(sjekk.loggetInn()).thenReturn(null);
 
         // act
@@ -75,7 +76,7 @@ public class EnhetstestAdminKundeController {
     @Test
     public void test_lagreKundeOk(){
 
-        // arrage
+        // arrange
         Kunde kunde1 = new Kunde("151299", "Kalle", "Knudsen", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
 
         when(sjekk.loggetInn()).thenReturn("151299");
@@ -91,7 +92,7 @@ public class EnhetstestAdminKundeController {
     @Test
     public void test_lagreKundeFeil(){
 
-        // arrage
+        // arrange
         Kunde kunde1 = new Kunde("151299", "Kalle", "Knudsen", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
 
         when(repository.registrerKunde((any(Kunde.class)))).thenReturn("Ikke logget inn");
@@ -111,7 +112,7 @@ public class EnhetstestAdminKundeController {
     @Test
     public void test_endreKundeOk(){
 
-        // arrage
+        // arrange
         Kunde kunde1 = new Kunde("151299", "Kalle", "Knudsen", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
 
         when(sjekk.loggetInn()).thenReturn("151299");
@@ -127,7 +128,7 @@ public class EnhetstestAdminKundeController {
     @Test
     public void test_endreKundeFeil(){
 
-        // arrage
+        // arrange
         Kunde kunde1 = new Kunde("151299", "Kalle", "Knudsen", "kattemveien", "7045", "Trondheim", "98501145","NokkaLangt");
 
         when(repository.endreKundeInfo((any(Kunde.class)))).thenReturn("Ikke logget inn");
@@ -142,6 +143,32 @@ public class EnhetstestAdminKundeController {
 
 
     //Slett, enten null eller "Ikke logget inn"
+    @Test
+    public void test_slettKundeOK(){
+        // arrange
+        when(sjekk.loggetInn()).thenReturn("01010110523");
+
+        when(repository.slettKunde(anyString())).thenReturn("OK");
+
+        // act
+        String resultat = adminKundeController.slett("01010110523");
+
+        // assert
+        assertEquals("OK", resultat);
+    }
+
+    // Tester slett kunde (Ikke Logget Inn)
+    @Test
+    public void test_slettKundeFeil(){
+        // arrange
+        when(sjekk.loggetInn()).thenReturn(null);
+
+        // act
+        String resultat = adminKundeController.slett("01010110523");
+
+        // assert
+        assertEquals("Ikke logget inn", resultat);
+    }
 
 
 }
