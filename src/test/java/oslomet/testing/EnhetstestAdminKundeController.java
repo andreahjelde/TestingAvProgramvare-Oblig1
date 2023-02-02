@@ -146,12 +146,12 @@ public class EnhetstestAdminKundeController {
     @Test
     public void test_slettKundeOK(){
         // arrange
-        when(sjekk.loggetInn()).thenReturn("01010110523");
+        when(sjekk.loggetInn()).thenReturn("151299");
 
         when(repository.slettKunde(anyString())).thenReturn("OK");
 
         // act
-        String resultat = adminKundeController.slett("01010110523");
+        String resultat = adminKundeController.slett("151299");
 
         // assert
         assertEquals("OK", resultat);
@@ -164,7 +164,7 @@ public class EnhetstestAdminKundeController {
         when(sjekk.loggetInn()).thenReturn(null);
 
         // act
-        String resultat = adminKundeController.slett("01010110523");
+        String resultat = adminKundeController.slett("151299");
 
         // assert
         assertEquals("Ikke logget inn", resultat);
