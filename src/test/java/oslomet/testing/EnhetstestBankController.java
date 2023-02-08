@@ -222,7 +222,7 @@ public class EnhetstestBankController {
     }
 
 
-    // Sjekker for utfør betaling hvis bruker er logget inn.
+    // Tester Utfør betaling hvis logget inn
     @Test
     public void utforBetaling_LoggetInn(){
         // arrange
@@ -248,7 +248,7 @@ public class EnhetstestBankController {
         assertEquals(transaksjoner, resultat);
     }
 
-    // Sjekker for utfør betaling hvis bruker ikke er logget inn.
+    // Tester Utfør betaling hvis ikke logget inn
     @Test
     public void utforBetaling_IkkeLoggetInn(){
         // arrange
@@ -262,7 +262,7 @@ public class EnhetstestBankController {
     }
 
 
-    //Registrer Betaling - Logget inn
+    //Tester Registrer Betaling dersom logget inn
     @Test
     public void registrerBetaling_LoggetInn(){
         // arrange
@@ -283,6 +283,7 @@ public class EnhetstestBankController {
         assertEquals("OK", resultat);
     }
 
+    //Tester Registrer betaling - ikke logget inn
     @Test
     public void registrerBetaling_IkkeLoggetInn(){
         // arrange
@@ -298,8 +299,7 @@ public class EnhetstestBankController {
         assertNull(resultat);
     }
 
-    //Endre kundeinfo - Logget inn - OK
-
+    //Tester endre kundeinfor - logget inn
     @Test
     public void endreKundeInfo_LoggetInn(){
         //arrange
@@ -319,6 +319,7 @@ public class EnhetstestBankController {
 
     }
 
+    //Tester endre kundeinfo - ikke logget inn
     @Test
     public void endreKundeInfo_IkkeLoggetInn(){
         // arrange
