@@ -107,7 +107,7 @@ public class EnhetstestBankController {
 
     /* skrevet av andrea */
 
-    //Hent transaksjoner -->
+    // Sjekker for hent Transaksjoner hvis bruker er logget inn.
 
     @Test
     public void hentTransaksjoner_LoggetInn(){
@@ -135,6 +135,7 @@ public class EnhetstestBankController {
         assertEquals(konti, resultat);
     }
 
+    // Sjekker for hent Transaksjoner hvis bruker ikke er logget inn.
     @Test
     public void hentTransaksjoner_IkkeLoggetInn(){
         // arrange
@@ -147,7 +148,7 @@ public class EnhetstestBankController {
         assertNull(resultat);
     }
 
-    //Hent Saldi -->
+    // Sjekker for hent Saldo hvis bruker er logget inn.
     @Test
     public void hentSaldi_LoggetInn(){
         // arrange
@@ -172,6 +173,7 @@ public class EnhetstestBankController {
         assertEquals(saldi, resultat);
     }
 
+    // Sjekker for hent Saldo hvis bruker ikke er logget inn.
     @Test
     public void hentSaldi_IkkeLoggetInn(){
         // arrange
@@ -184,7 +186,7 @@ public class EnhetstestBankController {
         assertNull(resultat);
     }
 
-    //Hent betalinger -->
+    // Sjekker for hent betalinger hvis bruker er logget inn.
     @Test
     public void hentBetalinger_LoggetInn(){
         List<Transaksjon> transaksjoner = new ArrayList<>();
@@ -207,6 +209,7 @@ public class EnhetstestBankController {
         assertEquals(transaksjoner, resultat);
     }
 
+    // Sjekker for hent betalinger hvis bruker ikke er logget inn.
     @Test
     public void hentBetalinger_IkkeLoggetInn(){
         // arrange
@@ -220,8 +223,7 @@ public class EnhetstestBankController {
     }
 
 
-    //Utfør betalinger -->
-
+    // Sjekker for utfør betaling hvis bruker er logget inn.
     @Test
     public void utforBetaling_LoggetInn(){
         // arrange
@@ -247,6 +249,7 @@ public class EnhetstestBankController {
         assertEquals(transaksjoner, resultat);
     }
 
+    // Sjekker for utfør betaling hvis bruker ikke er logget inn.
     @Test
     public void utforBetaling_IkkeLoggetInn(){
         // arrange
