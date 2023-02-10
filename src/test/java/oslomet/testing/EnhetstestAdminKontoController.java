@@ -6,12 +6,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import oslomet.testing.API.AdminKontoController;
-import oslomet.testing.API.BankController;
+
 import oslomet.testing.DAL.AdminRepository;
-import oslomet.testing.DAL.BankRepository;
 import oslomet.testing.Models.Konto;
-import oslomet.testing.Models.Kunde;
-import oslomet.testing.Models.Transaksjon;
 import oslomet.testing.Sikkerhet.Sikkerhet;
 
 import java.util.ArrayList;
