@@ -173,7 +173,7 @@ public class AdminRepository {
     //FOR INTEGRASJONSTESTING - Lagt til dette for å kunne initiere database i integrasjonstestingen.
 
     public String initDB(DataSource dataSource){
-        try{
+        try {
             Resource skjema = new ClassPathResource("schema.sql");
             Resource data = new  ClassPathResource("data.sql");
             ResourceDatabasePopulator databasePopulator = new ResourceDatabasePopulator(skjema,data);
