@@ -1,4 +1,3 @@
-//Kaja
 
 package oslomet.testing;
 

@@ -1,5 +1,4 @@
 package oslomet.testing;
-//Andrea - ny test
 
 
 import org.junit.Test;
